@@ -61,3 +61,12 @@ main {
   border: none;
   cursor: pointer;
 }
+
+.result {
+  justify-content: center;
+  display: flex;
+}
+.meme-image {
+  max-height: 70vh;
+  padding: .5em;
+}
