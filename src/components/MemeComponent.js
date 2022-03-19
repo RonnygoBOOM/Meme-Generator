@@ -4,32 +4,34 @@ import memesData from '../shared/memesData.js';
 
 export default function Meme() {
     
-    const [memeImage, setMemeImage] = React.useState("")
-    const [topText, setTopText] = React.useState("")
-    const [bottomText, setBottomText] = React.useState("")
+    // const [memeImage, setMemeImage] = React.useState("")
+    const [meme, setMeme] = React.useState({
+        topText: "",
+        bottomText: "",
+        randomImage: "",
+        allMemeImages: memesData
+    })
 
 
     function getMemeImage() {
         const memesArray = memesData.data.memes
         const url = memesArray[Math.floor(Math.random() * memesArray.length)].url
-        setMemeImage(url)
-    }
-
-    function getTopText() {
-        setTopText()
-    }
-
-    function getBottomText() {
-        setBottomText()
+        setMeme(prevMeme =>
+            {
+                return {
+                    ...prevMeme,
+                    randomImage: url
+                }
+            })
     }
 
     return (
         <main>
             <div className="form">
-                <input onChange={getTopText} className="form--input" type="text" placeholder="Top text">
+                <input className="form--input" type="text" placeholder="Top text">
                 
                 </input>
-                <input onChange={getBottomText} className="form--input" type="text" placeholder="Bottom text">
+                <input className="form--input" type="text" placeholder="Bottom text">
                 
                 </input>
                 <button onClick={getMemeImage} className="form--button">
@@ -37,9 +39,9 @@ export default function Meme() {
                 </button>
             </div>
             <div className="result">
-                <p>{topText}</p>
-                <img className="meme-image" src={memeImage}></img>
-                <p>{bottomText}</p>
+                <p>{meme.topText}</p>
+                <img className="meme-image" src={meme.randomImage}></img>
+                <p>{meme.bottomText}</p>
             </div>
         </main>
     )
